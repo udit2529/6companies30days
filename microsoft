@@ -1,1 +1,38 @@
-
+class Solution {
+public:  
+    long long int operartor( long long int a,long long int  b,char op){
+        if(op=='*'){
+            return a*b;
+        }
+        if(op=='/'){
+            return b/a;
+        }
+        if(op=='-'){
+            return b-a;
+        }
+        if(op=='+'){
+            return a+b;
+        }
+        return 0;
+    }
+    int evalRPN(vector<string>& nums) {
+        stack<long long int>s;
+       long long int a,b;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]!="*"&&nums[i]!="/"&&nums[i]!="-"&&nums[i]!="+"){
+                s.push(stoll(nums[i]));
+            }
+            else if(nums[i]=="*"||nums[i]=="/"||nums[i]=="-"||nums[i]=="+"){
+                a=s.top();
+                s.pop();
+                b=s.top();
+                s.pop();
+                string op=nums[i];
+                long long int c= operartor(a,b,op[0]);
+                s.push(c);
+            }
+        }
+        
+        return s.top();
+    }
+};
